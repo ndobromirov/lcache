@@ -237,11 +237,12 @@ class StaticL2 extends L2
                     $l1->setWithExpiration($event->event_id, $event->getAddress(), $unserialized_value, $event->created, $event->expiration);
                 }
             }
+            $last_applied_event_id = $event->event_id;
             $applied++;
         }
 
         // Just in case there were skipped events, set the high water mark.
-        $l1->setLastAppliedEventID($this->current_event_id);
+        $l1->setLastAppliedEventID($last_applied_event_id);
         return $applied;
     }
 

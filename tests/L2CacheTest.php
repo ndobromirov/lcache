@@ -177,7 +177,7 @@ abstract class L2CacheTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $l2->applyEvents($l1_1));
         $this->assertEquals(1, $l2->applyEvents($l1_2));
         $this->assertEquals(2, $l1_1->getLastAppliedEventID());
-        $this->assertEquals(2, $l1_2->getLastAppliedEventID());
+        $this->assertEquals(1, $l1_2->getLastAppliedEventID());
     }
 
     /**

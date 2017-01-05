@@ -98,14 +98,14 @@ class LCacheTest extends \PHPUnit_Extensions_Database_TestCase
         $pool1->set($myaddr, 'myvalue');
         $applied = $pool1->synchronize();
         $this->assertEquals(0, $applied);
-        $this->assertEquals($current_event_id + 1, $pool1->getLastAppliedEventID());
+        $this->assertEquals($current_event_id, $pool1->getLastAppliedEventID());
 
         // Add a new pool. Sync should return NULL applied changes but should
         // bump the last applied event ID.
         $pool2 = new Integrated($this->l1Factory()->create('static'), $central);
         $applied = $pool2->synchronize();
         $this->assertNull($applied);
-        $this->assertEquals($pool1->getLastAppliedEventID(), $pool2->getLastAppliedEventID());
+        $this->assertEquals($pool1->getLastAppliedEventID() + 1, $pool2->getLastAppliedEventID());
     }
 
     protected function performTombstoneTest($l1)
